@@ -8,22 +8,21 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Game {
-	private final int id;
+	private final int gameId;
 	private final List<Player> players;
 	private GameStatus status;
 	private GameOutcome outcome;
 
-	public Game(int id, Collection<Player> players) {
-		this.id = id;
+	public Game(int gameId, Collection<Player> players) {
+		this.gameId = gameId;
 		this.players = new ArrayList<>(players);
 		this.status = GameStatus.AWAITING_PLAYER_ACTIONS;
 	}
 
-	public int getId() {
-		return id;
+	public int getGameId() {
+		return gameId;
 	}
 
 	public List<Player> getPlayers() {
@@ -57,8 +56,18 @@ public class Game {
 	}
 
 	private Optional<Player> determineWinner(List<Player> players) {
-		Stream<PlayerAction> actionsRevealed = players.stream().map(Player::getAction);
-		Set<PlayerAction> losingActions = actionsRevealed.map(x -> getMatchUps().get(x)).collect(Collectors.toSet());
+		Set<PlayerAction> actionsRevealed = players.stream() //
+				.map(Player::getAction) //
+				.collect(Collectors.toSet());
+		
+		if (actionsRevealed.size() == 1) {
+			return Optional.empty();
+		}
+
+		Set<PlayerAction> losingActions = actionsRevealed.stream() //
+				.map(x -> getMatchUps().get(x)) //
+				.collect(Collectors.toSet());
+		
 		return players.stream().filter(x -> !losingActions.contains(x.getAction())).findAny();
 	}
 

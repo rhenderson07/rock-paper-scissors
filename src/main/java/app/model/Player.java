@@ -1,18 +1,18 @@
 package app.model;
 
 public class Player {
-	private int id;
+	private int playerId;
 	private PlayerAction action;
 	private PlayerStatus status;
 
-	public Player(int id) {
-		this.id = id;
+	public Player(int playerId) {
+		this.playerId = playerId;
 		this.status = PlayerStatus.AWAITING_ACTION;
 		this.action = PlayerAction.UNKNOWN;
 	}
 
 	public int getId() {
-		return id;
+		return playerId;
 	}
 
 	public PlayerAction getAction() {

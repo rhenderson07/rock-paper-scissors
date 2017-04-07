@@ -23,7 +23,7 @@ public class GameService {
 	public Game createGame() {
 		synchronized (this.monitor) {			
 			Game game = new Game(idGenerator.getAndIncrement(), getPlayers());
-			games.put(game.getId(), game);
+			games.put(game.getGameId(), game);
 			return game;
 		}
 	}
