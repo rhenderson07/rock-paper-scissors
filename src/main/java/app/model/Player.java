@@ -11,7 +11,7 @@ public class Player {
 		this.action = PlayerAction.UNKNOWN;
 	}
 
-	public int getId() {
+	public int getPlayerId() {
 		return playerId;
 	}
 

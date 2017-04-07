@@ -59,7 +59,7 @@ public class Game {
 		Set<PlayerAction> actionsRevealed = players.stream() //
 				.map(Player::getAction) //
 				.collect(Collectors.toSet());
-		
+
 		if (actionsRevealed.size() == 1) {
 			return Optional.empty();
 		}
@@ -67,7 +67,7 @@ public class Game {
 		Set<PlayerAction> losingActions = actionsRevealed.stream() //
 				.map(x -> getMatchUps().get(x)) //
 				.collect(Collectors.toSet());
-		
+
 		return players.stream().filter(x -> !losingActions.contains(x.getAction())).findAny();
 	}
 
