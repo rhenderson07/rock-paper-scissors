@@ -17,5 +17,4 @@ final class PlayerResourceAssembler {
 				.withSelfRel());
 		return resource;
 	}
-
 }

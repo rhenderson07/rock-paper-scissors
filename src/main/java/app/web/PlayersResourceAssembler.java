@@ -32,9 +32,9 @@ final class PlayersResourceAssembler implements ResourceAssembler<Game, Resource
 			playerResources.add(this.playerResourceAssembler.toResource(game, player));
 		}
 
-		Resources<Resource<Player>> resource = new Resources<>(playerResources);
-		resource.add(linkTo(GamesController.class).slash(game.getGameId()).slash("players").withSelfRel());
+		Resources<Resource<Player>> resources = new Resources<>(playerResources);
+		resources.add(linkTo(GamesController.class).slash(game.getGameId()).slash("players").withSelfRel());
 
-		return resource;
+		return resources;
 	}
 }

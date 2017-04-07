@@ -16,8 +16,7 @@ final class GameResourceAssembler implements ResourceAssembler<Game, Resource<Ga
 		Resource<Game> resource = new Resource<>(game);
 		resource.add(linkTo(GamesController.class).slash(game.getGameId()).withSelfRel());
 		resource.add(linkTo(GamesController.class).slash(game.getGameId()).slash("players").withRel("players"));
-		resource.add(linkTo(GamesController.class).slash(game.getGameId()).withRel("destroy"));
-		
+
 		return resource;
 	}
 }

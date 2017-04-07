@@ -42,41 +42,41 @@ public class GamesController {
 	private GameRepository gameService;
 
 	@PostMapping()
-	@ResponseStatus(code = HttpStatus.CREATED)
+	@ResponseStatus( HttpStatus.CREATED)
 	public Resource<Game> createGame() {
 		Game game = gameService.createGame();
 		return gameResourceAssembler.toResource(game);
 	}
 
 	@GetMapping()
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus( HttpStatus.OK)
 	public Resources<Resource<Game>> showAllGames() {
 		Collection<Game> games = gameService.retrieveAll();
 		return gamesResourceAssembler.toResource(games);
 	}
 
 	@GetMapping("/{gameId}")
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus( HttpStatus.OK)
 	public Resource<Game> showGame(@PathVariable Integer gameId) {
 		Game game = gameService.retrieve(gameId);
 		return gameResourceAssembler.toResource(game);
 	}
 
 	@DeleteMapping("/{gameId}")
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus( HttpStatus.OK)
 	public void destroyGame(@PathVariable Integer gameId) {
 		gameService.delete(gameId);
 	}
 
 	@GetMapping("/{gameId}/players")
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus( HttpStatus.OK)
 	public Resources<Resource<Player>> showPlayers(@PathVariable Integer gameId) {
 		Game game = gameService.retrieve(gameId);
 		return playersResourceAssembler.toResource(game);
 	}
 
 	@PutMapping("/{gameId}/players/{playerId}")
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus( HttpStatus.OK)
 	public void setPlayerAction(@PathVariable Integer gameId, @PathVariable Integer playerId,
 			@RequestParam PlayerAction action) {
 		Game game = gameService.retrieve(gameId);
