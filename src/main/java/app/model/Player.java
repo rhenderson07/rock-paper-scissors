@@ -1,5 +1,9 @@
 package app.model;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class Player {
 	private int playerId;
 	private PlayerAction action;
@@ -8,18 +12,24 @@ public class Player {
 	public Player(int playerId) {
 		this.playerId = playerId;
 		this.status = PlayerStatus.AWAITING_ACTION;
-		this.action = PlayerAction.UNKNOWN;
 	}
 
 	public int getPlayerId() {
 		return playerId;
 	}
 
+	public List<PlayerAction> getAvailableActions() {
+		if (status == PlayerStatus.AWAITING_ACTION) {
+			return Arrays.asList(PlayerAction.values());
+		}
+		return Collections.emptyList();
+	}
+
 	public PlayerAction getAction() {
 		if (status == PlayerStatus.REVEALED) {
 			return action;
 		}
-		return PlayerAction.UNKNOWN;
+		return null;
 	}
 
 	public void setAction(PlayerAction action) {
@@ -30,8 +40,8 @@ public class Player {
 	public PlayerStatus getStatus() {
 		return status;
 	}
-	
-	public void reveal(){
+
+	public void reveal() {
 		this.status = PlayerStatus.REVEALED;
 	}
 }
