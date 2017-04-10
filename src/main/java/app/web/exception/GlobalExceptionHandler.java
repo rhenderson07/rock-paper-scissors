@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import app.model.exception.GameDoesNotExistException;
-import app.model.exception.PlayerDoesNotExistException;
+import app.model.exception.ElementNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler({ GameDoesNotExistException.class, PlayerDoesNotExistException.class })
+	@ExceptionHandler({ ElementNotFoundException.class })
 	ResponseEntity<String> handleNotFounds(Exception e) {
 		return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}

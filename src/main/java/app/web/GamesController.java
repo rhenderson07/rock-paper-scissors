@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 import app.model.Game;
 import app.model.Player;
 import app.model.PlayerAction;
-import app.model.exception.GameDoesNotExistException;
 import app.repo.GameRepository;
 
 @RestController
@@ -64,7 +63,7 @@ public class GamesController {
 
 	@GetMapping("/{gameId}")
 	@ResponseStatus(HttpStatus.OK)
-	public Resource<Game> showGame(@PathVariable Integer gameId) throws GameDoesNotExistException {
+	public Resource<Game> showGame(@PathVariable Integer gameId) {
 		Game game = gameService.retrieve(gameId);
 		return gameResourceAssembler.toResource(game);
 	}
@@ -77,7 +76,14 @@ public class GamesController {
 
 	@GetMapping("/{gameId}/players")
 	@ResponseStatus(HttpStatus.OK)
-	public Resources<Resource<Player>> showPlayers(@PathVariable Integer gameId) throws GameDoesNotExistException {
+	public Resources<Resource<Player>> showPlayersForGame(@PathVariable Integer gameId) {
+		Game game = gameService.retrieve(gameId);
+		return playersResourceAssembler.toResource(game);
+	}
+
+	@GetMapping("/{gameId}/players/{playerId}")
+	@ResponseStatus(HttpStatus.OK)
+	public Resources<Resource<Player>> showPlayer(@PathVariable Integer gameId, @PathVariable Integer playerId) {
 		Game game = gameService.retrieve(gameId);
 		return playersResourceAssembler.toResource(game);
 	}
@@ -85,7 +91,7 @@ public class GamesController {
 	@PutMapping("/{gameId}/players/{playerId}")
 	@ResponseStatus(HttpStatus.OK)
 	public void setPlayerAction(@PathVariable Integer gameId, @PathVariable Integer playerId,
-			@RequestParam PlayerAction action) throws GameDoesNotExistException {
+			@RequestParam PlayerAction action) {
 		Game game = gameService.retrieve(gameId);
 		game.selectAction(playerId, action);
 	}

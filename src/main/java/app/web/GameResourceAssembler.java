@@ -8,7 +8,6 @@ import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
 import app.model.Game;
-import app.model.exception.GameDoesNotExistException;
 
 @Component
 final class GameResourceAssembler implements ResourceAssembler<Game, Resource<Game>> {
@@ -17,12 +16,7 @@ final class GameResourceAssembler implements ResourceAssembler<Game, Resource<Ga
 	public Resource<Game> toResource(Game game) {
 		Resource<Game> resource = new Resource<>(game);
 		resource.add(linkTo(GamesController.class).slash(game.getGameId()).withSelfRel());
-		
-		try {
-			resource.add(linkTo(methodOn(GamesController.class).showPlayers(game.getGameId())).withRel("players"));
-		} catch (GameDoesNotExistException e) {
-			e.printStackTrace();
-		}
+		resource.add(linkTo(methodOn(GamesController.class).showPlayersForGame(game.getGameId())).withRel("players"));
 
 		return resource;
 	}

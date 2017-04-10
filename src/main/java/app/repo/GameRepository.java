@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import app.model.ComputerPlayer;
 import app.model.Game;
 import app.model.Player;
-import app.model.exception.GameDoesNotExistException;
+import app.model.exception.ElementNotFoundException;
 
 @Repository
 public class GameRepository {
@@ -29,9 +29,9 @@ public class GameRepository {
 		}
 	}
 
-	public Game retrieve(int gameId) throws GameDoesNotExistException {
+	public Game retrieve(int gameId) throws ElementNotFoundException {
 		if (!games.containsKey(gameId)){
-			throw new GameDoesNotExistException(gameId);
+			throw new ElementNotFoundException(gameId);
 		}
 		
 		return games.get(gameId);
