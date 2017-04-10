@@ -30,7 +30,7 @@ import app.model.exception.GameDoesNotExistException;
 import app.repo.GameRepository;
 
 @RestController
-@RequestMapping(value = "/games", produces = "application/vnd.api+json")
+@RequestMapping(value = "/games")
 public class GamesController {
 
 	@Autowired
