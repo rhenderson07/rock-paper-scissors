@@ -15,8 +15,8 @@ final class GameResourceAssembler implements ResourceAssembler<Game, Resource<Ga
 	@Override
 	public Resource<Game> toResource(Game game) {
 		Resource<Game> resource = new Resource<>(game);
-		resource.add(linkTo(GamesController.class).slash(game.getGameId()).withSelfRel());
-		resource.add(linkTo(methodOn(GamesController.class).showPlayersForGame(game.getGameId())).withRel("players"));
+//		resource.add(linkTo(GamesController.class).slash(game.getGameId()).withSelfRel());
+//		resource.add(linkTo(methodOn(GamesController.class).showPlayersForGame(game.getGameId())).withRel("players"));
 
 		return resource;
 	}

@@ -1,7 +1,6 @@
 package app.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,22 +8,49 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Game {
-	private final int gameId;
-	private final List<Player> players;
-	private GameStatus status;
-	private GameOutcome outcome;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
-	public Game(int gameId, Collection<Player> players) {
-		this.gameId = gameId;
-		this.players = new ArrayList<>(players);
-		this.status = GameStatus.AWAITING_PLAYER_ACTIONS;
+import org.springframework.hateoas.Identifiable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class Game implements Identifiable<Integer> {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer gameId;
+
+	private GameStatus status;
+
+	@OrderColumn
+	@Column(unique = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Player> players;
+
+	public Game() {
+		this.players = buildPlayers();
 	}
 
-	public int getGameId() {
+	// public Game(int gameId, Collection<Player> players) {
+	// this.gameId = gameId;
+	// this.players = new ArrayList<>(players);
+	// this.status = GameStatus.AWAITING_PLAYER_ACTIONS;
+	// }
+
+	@Override
+	public Integer getId() {
 		return gameId;
 	}
 
+	@JsonIgnore
 	public List<Player> getPlayers() {
 		return players;
 	}
@@ -43,16 +69,16 @@ public class Game {
 		}
 	}
 
-	public Optional<GameOutcome> getOutcome() {
-		return Optional.ofNullable(outcome);
-	}
+	// public Optional<GameOutcome> getOutcome() {
+	// return Optional.ofNullable(outcome);
+	// }
 
 	private void resolveActions(List<Player> players) {
 		players.forEach(Player::reveal);
 		status = GameStatus.COMPLETE;
 
 		Optional<Player> winnerOpt = determineWinner(players);
-		outcome = determineOutcome(winnerOpt);
+		// outcome = determineOutcome(winnerOpt);
 	}
 
 	private Optional<Player> determineWinner(List<Player> players) {
@@ -102,5 +128,12 @@ public class Game {
 		}
 
 		return new GameOutcome(result, winner);
+	}
+
+	private List<Player> buildPlayers() {
+		List<Player> players = new ArrayList<>();
+		players.add(new Player());
+		players.add(new ComputerPlayer());
+		return players;
 	}
 }

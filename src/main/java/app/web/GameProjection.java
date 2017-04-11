@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 the original author or authors.
+ * Copyright 2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package app.repo;
+package app.web;
 
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.config.Projection;
 
 import app.model.Game;
-import app.web.GameProjection;
+import app.model.GameStatus;
 
-public interface GameRepository extends PagingAndSortingRepository<Game, Integer> {
-
+@Projection(name = "summary", types = Game.class)
+public interface GameProjection {
+	GameStatus getStatus();
 }

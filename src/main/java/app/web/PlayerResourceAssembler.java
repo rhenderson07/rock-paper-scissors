@@ -13,8 +13,8 @@ final class PlayerResourceAssembler {
 
 	public Resource<Player> toResource(Game game, Player player) {
 		Resource<Player> resource = new Resource<>(player);
-		resource.add(linkTo(GamesController.class).slash(game.getGameId()).slash("players").slash(player.getPlayerId())
-				.withSelfRel());
+//		resource.add(linkTo(GamesController.class).slash(game.getId()).slash("players").slash(player.getPlayerId())
+//				.withSelfRel());
 		return resource;
 	}
 }

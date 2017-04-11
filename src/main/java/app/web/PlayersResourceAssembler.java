@@ -28,12 +28,12 @@ final class PlayersResourceAssembler implements ResourceAssembler<Game, Resource
 	public Resources<Resource<Player>> toResource(Game game) {
 		List<Resource<Player>> playerResources = new ArrayList<>();
 
-		for (Player player : game.getPlayers()) {
-			playerResources.add(this.playerResourceAssembler.toResource(game, player));
-		}
+//		for (Player player : game.getPlayers()) {
+//			playerResources.add(this.playerResourceAssembler.toResource(game, player));
+//		}
 
 		Resources<Resource<Player>> resources = new Resources<>(playerResources);
-		resources.add(linkTo(GamesController.class).slash(game.getGameId()).slash("players").withSelfRel());
+		resources.add(linkTo(GamesController.class).slash(game.getId()).slash("players").withSelfRel());
 
 		return resources;
 	}
