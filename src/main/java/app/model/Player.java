@@ -15,7 +15,6 @@ public class Player implements Identifiable<Integer> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonIgnore
 	private Integer playerId;
 	
 	private PlayerAction action;
@@ -28,6 +27,7 @@ public class Player implements Identifiable<Integer> {
 		this.status = PlayerStatus.AWAITING_ACTION;
 	}
 
+	@JsonIgnore
 	@Override
 	public Integer getId() {
 		return playerId;
@@ -52,7 +52,8 @@ public class Player implements Identifiable<Integer> {
 	public void reveal() {
 		this.status = PlayerStatus.REVEALED;
 	}
-	
+
+	@JsonIgnore
 	public boolean isRevealed() {
 		return this.status == PlayerStatus.REVEALED;
 	}
