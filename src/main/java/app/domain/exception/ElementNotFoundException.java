@@ -1,4 +1,4 @@
-package app.model.exception;
+package app.domain.exception;
 
 public final class ElementNotFoundException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

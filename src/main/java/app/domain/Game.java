@@ -1,4 +1,4 @@
-package app.model;
+package app.domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.Identifiable;
 
 @Entity
@@ -31,6 +32,7 @@ public class Game implements Identifiable<Integer> {
 	@OrderColumn
 	@Column(unique = true)
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@RestResource
 	private List<Player> players;
 
 	public Game() {

@@ -3,9 +3,11 @@ package app.repo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import app.model.Player;
+import app.domain.Player;
 
-@RepositoryRestResource
-public interface PlayerRepository extends PagingAndSortingRepository<Player, Integer> {
+@RepositoryRestResource//(exported=false)
+public interface PlayerRepository 
+extends PagingAndSortingRepository<Player, Integer> 
+{
 
 }

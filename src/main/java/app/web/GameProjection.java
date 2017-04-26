@@ -17,8 +17,8 @@ package app.web;
 
 import org.springframework.data.rest.core.config.Projection;
 
-import app.model.Game;
-import app.model.GameStatus;
+import app.domain.Game;
+import app.domain.GameStatus;
 
 @Projection(name = "summary", types = Game.class)
 public interface GameProjection {
