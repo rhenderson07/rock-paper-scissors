@@ -19,8 +19,6 @@ import javax.persistence.OrderColumn;
 
 import org.springframework.hateoas.Identifiable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Game implements Identifiable<Integer> {
 
@@ -36,27 +34,32 @@ public class Game implements Identifiable<Integer> {
 	private List<Player> players;
 
 	public Game() {
-		this.players = buildPlayers();
+		this(new ArrayList<>());
 	}
 
-	// public Game(int gameId, Collection<Player> players) {
-	// this.gameId = gameId;
-	// this.players = new ArrayList<>(players);
-	// this.status = GameStatus.AWAITING_PLAYER_ACTIONS;
-	// }
+	public Game(List<Player> players) {
+		this.players = players;
+	}
 
 	@Override
 	public Integer getId() {
 		return gameId;
 	}
 
-	@JsonIgnore
 	public List<Player> getPlayers() {
 		return players;
 	}
 
 	public GameStatus getStatus() {
 		return status;
+	}
+
+	public void setStatus(GameStatus status) {
+		this.status = status;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 
 	public void selectAction(int playerId, PlayerAction action) {
@@ -68,10 +71,6 @@ public class Game implements Identifiable<Integer> {
 			resolveActions(players);
 		}
 	}
-
-	// public Optional<GameOutcome> getOutcome() {
-	// return Optional.ofNullable(outcome);
-	// }
 
 	private void resolveActions(List<Player> players) {
 		players.forEach(Player::reveal);
@@ -107,33 +106,26 @@ public class Game implements Identifiable<Integer> {
 		return matchups;
 	}
 
-	private GameOutcome determineOutcome(Optional<Player> winner) {
-		GameResult result;
-		if (!winner.isPresent()) {
-			result = GameResult.TIE;
-		} else {
-			switch (winner.get().getAction()) {
-			case ROCK:
-				result = GameResult.ROCK_WIN;
-				break;
-			case PAPER:
-				result = GameResult.PAPER_WIN;
-				break;
-			case SCISSORS:
-				result = GameResult.SCISSOR_WIN;
-				break;
-			default:
-				throw new IllegalStateException();
-			}
-		}
-
-		return new GameOutcome(result, winner);
-	}
-
-	private List<Player> buildPlayers() {
-		List<Player> players = new ArrayList<>();
-		players.add(new Player());
-		players.add(new ComputerPlayer());
-		return players;
-	}
+	// private GameOutcome determineOutcome(Optional<Player> winner) {
+	// GameResult result;
+	// if (!winner.isPresent()) {
+	// result = GameResult.TIE;
+	// } else {
+	// switch (winner.get().getAction()) {
+	// case ROCK:
+	// result = GameResult.ROCK_WIN;
+	// break;
+	// case PAPER:
+	// result = GameResult.PAPER_WIN;
+	// break;
+	// case SCISSORS:
+	// result = GameResult.SCISSOR_WIN;
+	// break;
+	// default:
+	// throw new IllegalStateException();
+	// }
+	// }
+	//
+	// return new GameOutcome(result, winner);
+	// }
 }
