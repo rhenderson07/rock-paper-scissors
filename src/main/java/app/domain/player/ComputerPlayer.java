@@ -1,4 +1,4 @@
-package app.domain;
+package app.domain.player;
 
 import java.security.SecureRandom;
 

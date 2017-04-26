@@ -1,4 +1,4 @@
-package app.domain;
+package app.domain.player;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import org.springframework.hateoas.Identifiable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import app.domain.game.Game;
 
 @Entity
 public class Player implements Identifiable<Integer> {

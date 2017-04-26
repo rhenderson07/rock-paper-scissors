@@ -1,4 +1,4 @@
-package app.domain;
+package app.domain.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.domain.player.ComputerPlayer;
+import app.domain.player.Player;
 import app.repo.GameRepository;
 import app.repo.PlayerRepository;
 

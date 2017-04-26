@@ -1,4 +1,4 @@
-package app.domain;
+package app.domain.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,10 @@ import javax.persistence.OrderColumn;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.Identifiable;
+
+import app.domain.player.Player;
+import app.domain.player.PlayerAction;
+import app.domain.player.PlayerStatus;
 
 @Entity
 public class Game implements Identifiable<Integer> {

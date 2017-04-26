@@ -5,8 +5,8 @@ import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.stereotype.Component;
 
-import app.domain.Game;
-import app.domain.GameService;
+import app.domain.game.Game;
+import app.domain.game.GameService;
 
 @Component
 @RepositoryEventHandler(Game.class)
