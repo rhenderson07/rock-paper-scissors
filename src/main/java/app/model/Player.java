@@ -1,9 +1,5 @@
 package app.model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,34 +11,30 @@ import org.springframework.hateoas.Identifiable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Player implements Identifiable<Integer>{
+public class Player implements Identifiable<Integer> {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonIgnore
 	private Integer playerId;
+	
 	private PlayerAction action;
 	private PlayerStatus status;
-	
+
 	@ManyToOne
 	private Game game;
 
-//	public Player(int playerId) {
-//		this.playerId = playerId;
-//		this.status = PlayerStatus.AWAITING_ACTION;
-//	}
+	public Player() {
+		this.status = PlayerStatus.AWAITING_ACTION;
+	}
 
 	@Override
 	public Integer getId() {
-		// TODO Auto-generated method stub
 		return playerId;
 	}
 
-//	public int getPlayerId() {
-//		return playerId;
-//	}
-
 	public PlayerAction getAction() {
-		if (status == PlayerStatus.REVEALED) {
+		if (isRevealed()) {
 			return action;
 		}
 		return null;
@@ -59,5 +51,9 @@ public class Player implements Identifiable<Integer>{
 
 	public void reveal() {
 		this.status = PlayerStatus.REVEALED;
+	}
+	
+	public boolean isRevealed() {
+		return this.status == PlayerStatus.REVEALED;
 	}
 }
