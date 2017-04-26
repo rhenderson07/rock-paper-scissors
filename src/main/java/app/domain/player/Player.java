@@ -18,7 +18,6 @@ public class Player implements Identifiable<Integer> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer playerId;
-	
 	private PlayerAction action;
 	private PlayerStatus status;
 

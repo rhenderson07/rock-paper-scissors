@@ -23,7 +23,9 @@ import org.springframework.hateoas.Identifiable;
 import app.domain.player.Player;
 import app.domain.player.PlayerAction;
 import app.domain.player.PlayerStatus;
+import lombok.Data;
 
+@Data
 @Entity
 public class Game implements Identifiable<Integer> {
 
@@ -39,33 +41,9 @@ public class Game implements Identifiable<Integer> {
 	@RestResource
 	private List<Player> players;
 
-	public Game() {
-		this(new ArrayList<>());
-	}
-
-	public Game(List<Player> players) {
-		this.players = players;
-	}
-
 	@Override
 	public Integer getId() {
 		return gameId;
-	}
-
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public GameStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(GameStatus status) {
-		this.status = status;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
 	}
 
 	public void selectAction(int playerId, PlayerAction action) {
