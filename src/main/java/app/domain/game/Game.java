@@ -1,6 +1,5 @@
 package app.domain.game;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +33,7 @@ public class Game implements Identifiable<Integer> {
 	private Integer gameId;
 
 	private GameStatus status;
+	private Integer winner;
 
 	@OrderColumn
 	@Column(unique = true)
