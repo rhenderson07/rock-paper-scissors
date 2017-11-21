@@ -1,4 +1,4 @@
-package app.model;
+package app.domain.player;
 
 import java.security.SecureRandom;
 
@@ -6,8 +6,7 @@ public class ComputerPlayer extends Player {
 	
 	private static final SecureRandom RANDOM = new SecureRandom();
 	
-	public ComputerPlayer(int id) {
-		super(id);
+	public ComputerPlayer() {
 		super.setAction(getRandomAction());
 	}
 	

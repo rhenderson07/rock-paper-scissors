@@ -1,6 +1,8 @@
-package app.model;
+package app.domain.game;
 
 import java.util.Optional;
+
+import app.domain.player.Player;
 
 public class GameOutcome {
 	private GameResult result;
