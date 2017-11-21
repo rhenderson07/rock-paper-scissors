@@ -22,5 +22,5 @@ import app.domain.game.GameStatus;
 
 @Projection(name = "summary", types = Game.class)
 public interface GameProjection {
-	GameStatus getStatus();
+    GameStatus getStatus();
 }
